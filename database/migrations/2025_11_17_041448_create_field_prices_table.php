@@ -1,0 +1,25 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create('field_prices', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('field_id')->constrained()->onDelete('cascade'); // Relasi ke fields
+            $table->time('start_time'); 
+            $table->time('end_time');   
+            $table->integer('price_per_hour'); 
+            $table->timestamps(); // created_at, updated_at
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('field_prices');
+    }
+};
